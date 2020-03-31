@@ -3,11 +3,11 @@ stage('Build') {
 	dir("../source") {
 		
 		sh "mvn -v"
-		sh "mvn clean package -f hello-world/pom.xml"
+		sh "mvn clean package -f pom.xml"
 		
 		sh "mkdir /tmp/app"
 		
-		def jarFile = sh(returnStdout: true, script: 'find hello-world/target -maxdepth 1 -regextype posix-extended -regex ".+\\.(jar|war)\$" | head -n 1').trim()
+		def jarFile = sh(returnStdout: true, script: 'find target -maxdepth 1 -regextype posix-extended -regex ".+\\.(jar|war)\$" | head -n 1').trim()
 		sh "cp ${jarFile} /tmp/app/app.jar"
 		
 		withCredentials([file(credentialsId:'Dockerfile', variable:'Dockerfile')]) {
