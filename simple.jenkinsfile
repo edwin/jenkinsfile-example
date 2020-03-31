@@ -1,9 +1,6 @@
 stage('Build') {
 
 	dir("../source") {
-		sh "pwd"
-		sh "ls -alrth"
-		sh "ls -alrth hello-world"
 		
 		sh "mvn -v"
 		sh "mvn clean package -f hello-world/pom.xml"
